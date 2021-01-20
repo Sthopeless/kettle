@@ -23,7 +23,7 @@ value_template: >
   {% elif value_json.TuyaReceived['101'].DpIdData == "03" %} 100°
   {% elif value_json.TuyaReceived['101'].DpIdData == "04" %} Boiling
   {% elif value_json.TuyaReceived['101'].DpIdData == "05" %}
-    Custom {{ states('input_number.kettle_temp_choice') | int }}°
+    Custom {{ states('input_number.kettle_custom_temp') | int }}°
   {% elif value_json.TuyaReceived['101'].DpIdData == "06" %} Stop
   {% else %} 
    {{ states('sensor.kettle_working_mode') }}
@@ -40,7 +40,7 @@ Create rule2:
 ```
 rule2 on system#boot do publish2
 homeassistant/sensor/%macaddr%_kettle_working_mode/config
-{"name":"Kettle Working Mode","icon":"mdi:kettle-alert","state_topic":"tele/Kettle/RESULT","value_template":"{% if value_json.TuyaReceived['101'].DpIdData == \"00\" %} 45° {% elif value_json.TuyaReceived['101'].DpIdData == \"01\" %} 60° {% elif value_json.TuyaReceived['101'].DpIdData == \"02\" %} 85° {% elif value_json.TuyaReceived['101'].DpIdData == \"03\" %} 100° {% elif value_json.TuyaReceived['101'].DpIdData == \"04\" %} Boiling {% elif value_json.TuyaReceived['101'].DpIdData == \"05\" %}\n  Custom {{ states('input_number.kettle_temp_choice') | int }}°\n{% elif value_json.TuyaReceived['101'].DpIdData == \"06\" %} Stop {% else %} \n {{ states('sensor.kettle_working_mode') }}\n{% endif %}\n","unique_id":"%deviceid%_kettle_working_mode","device":{"connections":[["mac","%macaddr%"]]},"availability_topic":"tele/%topic%/LWT","payload_available":"Online","payload_not_available":"Offline"}
+{"name":"Kettle Working Mode","icon":"mdi:kettle-alert","state_topic":"tele/Kettle/RESULT","value_template":"{% if value_json.TuyaReceived['101'].DpIdData == \"00\" %} 45° {% elif value_json.TuyaReceived['101'].DpIdData == \"01\" %} 60° {% elif value_json.TuyaReceived['101'].DpIdData == \"02\" %} 85° {% elif value_json.TuyaReceived['101'].DpIdData == \"03\" %} 100° {% elif value_json.TuyaReceived['101'].DpIdData == \"04\" %} Boiling {% elif value_json.TuyaReceived['101'].DpIdData == \"05\" %}\n  Custom {{ states('input_number.kettle_custom_temp') | int }}°\n{% elif value_json.TuyaReceived['101'].DpIdData == \"06\" %} Stop {% else %} \n {{ states('sensor.kettle_working_mode') }}\n{% endif %}\n","unique_id":"%deviceid%_kettle_working_mode","device":{"connections":[["mac","%macaddr%"]]},"availability_topic":"tele/%topic%/LWT","payload_available":"Online","payload_not_available":"Offline"}
 endon
 ```
 
